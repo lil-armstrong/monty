@@ -123,6 +123,8 @@ void lineParser(char *line, unsigned int line_number, stack_t **stack)
 		swap(stack, line_number);
 	else if (strcmp(opcode, "add") == 0)
 		add(stack, line_number);
+	else if (strcmp(opcode, "nop") == 0)
+		nop();
 	else
 	{
 		fprintf(stderr, "L%d: unknown instruction %s", line_number, opcode);
