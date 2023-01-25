@@ -21,9 +21,7 @@ void pint(stack_t **top, unsigned int line_number)
 }
 
 /**
- * swap - swap two elements from the stack.
- * One from the top of the stack
- * the other from the bottom of the stack
+ * swap - swap the top two elements on the stack.
  * @top: top of stack
  * @line_number: current line number of command
  */
@@ -42,6 +40,29 @@ void swap(stack_t **top, unsigned int line_number)
 	temp = (*top)->n;
 	(*top)->n = (*top)->prev->n;
 	(*top)->prev->n = temp;
+}
+/**
+ * add - add the top two elements from the stack.
+ * @top: top of stack
+ * @line_number: current line number of command
+ */
+void add(stack_t **top, unsigned int line_number)
+{
+	stack_t *temp;
+
+	if (!hasElement((*top), 2))
+	{
+		fprintf(stderr, "L%d: can't add, stack too short", line_number);
+		exit(EXIT_FAILURE);
+	}
+
+	toTop(top);
+
+	temp = (*top);
+	(*top) = temp->prev;
+	(*top)->n = temp->n + (*top)->n;
+	free(temp);
+	(*top)->next = NULL;
 }
 
 /**
